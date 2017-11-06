@@ -9,6 +9,7 @@ import { activityEffects }  from './effects/activitiesEffects';
 import { AppComponent } from './app.component';
 import { ProgramComponent } from './program/program.component';
 import { ActivityComponent } from './activity/activity.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ActivityComponent } from './activity/activity.component';
     EffectsModule.run(programsEffects),
     EffectsModule.run(activityEffects),
     HttpModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

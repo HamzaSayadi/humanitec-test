@@ -1,3 +1,12 @@
-<span class="program-container">
-  {{ program.name }}
-<span>
+<ngb-accordion #acc="ngbAccordion" >
+    <ngb-panel title="{{ program.name }}">
+      <ng-template ngbPanelContent>
+        <div *ngIf="program.activties.length == 0"> No activities added yet</div>
+        <ul *ngFor="let activity of program.activties" class="list-group">
+          <li class="list-group-item">
+          <activity [activity]=activity>
+          </activity>
+          </li>
+        </ul>
+      </ng-template>
+</ngb-panel>

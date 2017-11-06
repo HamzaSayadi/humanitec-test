@@ -1,13 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center" class="container">
+<div class="container">
 
 <nav class="navbar navbar-light bg-faded">
-  <h1 class="navbar-brand mb-0">This is the list of programs</h1>
+  <h1 class="navbar-brand mb-0 text-center">This is the list of programs</h1>
 </nav>
-  <ul *ngFor="let program of programs" class="list-group">
-     <li class="list-group-item program-item">
+     <div *ngFor="let program of programs" class="program-item">
        <program [program]="program"> </program>
-     </li>
-  </ul>
-
+     </div>
 </div>
