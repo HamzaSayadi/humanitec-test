@@ -29,12 +29,12 @@ export class ProgramComponent implements OnInit {
   }
 
   add(value) {
-    
+
     this.store.dispatch({ type: 'ADD_ACTIVITY', payload: {
         "name": value.name,
         "workflowlevel1": this.program.url,
-        "expected_start_date": value.startdate,
-        "expected_end_date": value.enddate
+        "expected_start_date": new Date(value.startdate),
+        "expected_end_date": new Date(value.enddate)
       } });
   }
 
