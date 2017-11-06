@@ -1,6 +1,6 @@
 // counter.ts
 import { ActionReducer, Action } from '@ngrx/store';
-import { GET_PROGRAMS } from '../actions';
+import { GOT_PROGRAMS , GOT_ACTIVITIES } from '../actions';
 
 
 export interface AppState {
@@ -11,9 +11,14 @@ export const INITIAL_STATE : AppState = {
 	programs : []
 }
 
-export function programsReducer(state: AppState = INITIAL_STATE, action: Action) {
+export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
 	switch (action.type) {
-		case GET_PROGRAMS:
+		case GOT_PROGRAMS:
+			return {
+				...state,
+				programs : state.programs
+			};
+		case GOT_ACTIVITIES:
 			return {
 				...state,
 				programs : state.programs

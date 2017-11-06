@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { programsReducer } from './reducers/programsReducer'
+import { mainReducer } from './reducers/mainReducer'
 import { programsEffects } from './effects/programsEffects'
 import { AppComponent } from './app.component';
 
@@ -13,8 +13,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    StoreModule.provideStore({programsReducer}),
-    EffectsModule.run(programsEffects),
+    StoreModule.provideStore({mainReducer}),
+    EffectsModule.run(programsEffects)
   ],
   providers: [],
   bootstrap: [AppComponent]
