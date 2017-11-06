@@ -33,12 +33,4 @@ export class ActivityComponent implements OnChanges, OnInit {
 
   }
 
-  add() {
-    this.store.dispatch({ type: 'ADD_ACTIVITY', payload: {
-        "name": "paptoss",
-        "workflowlevel1": "http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel1/115/",
-        "expected_start_date": new Date(),
-        "expected_end_date": new Date()
-      } });
-  }
 }

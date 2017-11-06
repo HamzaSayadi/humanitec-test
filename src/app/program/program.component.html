@@ -1,12 +1,36 @@
-<ngb-accordion #acc="ngbAccordion" >
-    <ngb-panel title="{{ program.name }}">
-      <ng-template ngbPanelContent>
-        <div *ngIf="program.activties.length == 0"> No activities added yet</div>
-        <ul *ngFor="let activity of program.activties" class="list-group">
-          <li class="list-group-item">
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel title="{{ program.name }}">
+    <ng-template ngbPanelContent>
+      <div *ngIf="program.activties.length == 0"> No activities added yet</div>
+      <ul *ngFor="let activity of program.activties" class="list-group">
+        <li class="list-group-item">
           <activity [activity]=activity>
           </activity>
-          </li>
-        </ul>
-      </ng-template>
-</ngb-panel>
+        </li>
+      </ul>
+      <li class="list-group-item">
+        <div *ngIf="!name; else forminfo">
+          <form [formGroup]="rForm" (ngSubmit)="add(rForm.value)">
+
+                <label>Name
+                  <input type="text" formControlName="name">
+                </label>
+                <p *ngIf="rForm.controls.name.errors">This field is required!</p>
+                <label>Start date
+                  <input type="text" formControlName="startdate">
+                </label>
+
+                <label>End date
+                  <input type="text" formControlName="enddate">
+                </label>
+
+                <input type="submit" class="btn " value="Submit Form" [disabled]="!rForm.valid">
+
+          </form>
+        </div>
+
+{{rForm.controls}}
+
+      </li>
+    </ng-template>
+  </ngb-panel>
