@@ -42,11 +42,11 @@ export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
 				activities : newActivities
 			};
 
-
-		case ADD_ACTIVITY:
+		case ADDED_ACTIVITY:	
+		 	console.log([...state.activities].concat([action.payload.pulledItem]));
 			return {
 				...state,
-				activity : action.payload.pulledItem
+				activities : [...state.activities].concat([action.payload.pulledItem])
 			};
 
 		default:
