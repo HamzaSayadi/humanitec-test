@@ -9,6 +9,8 @@ import 'rxjs/add/operator/switchMap';
 
 import { Observable } from "rxjs";
 
+import Program from "../models/Program";
+
 @Injectable()
 export class programsEffects {
 
@@ -21,9 +23,17 @@ export class programsEffects {
         .map((res) =>
           res.json().map(item => {
             return new Program(
+              item.url,
               item.id,
+              item.status,
               item.name,
-              item.email
+              item.description,
+              item.start_date,
+              item.end_date,
+              item.create_date,
+              item.edit_date,
+              item.organization,
+              []
             )
           }
           )
