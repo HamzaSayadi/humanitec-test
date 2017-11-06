@@ -15,6 +15,7 @@ export const INITIAL_STATE : AppState = {
 }
 
 export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
+	console.info(action.type)
 	switch (action.type) {
 		case GOT_PROGRAMS:
 			return {
@@ -24,7 +25,7 @@ export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
 		case GOT_ACTIVITIES:
 			return {
 				...state,
-				programs : action.payload.pulledArray
+				activities : action.payload.pulledArray
 			};
 
 		default:

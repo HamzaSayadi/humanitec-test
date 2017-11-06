@@ -11,17 +11,16 @@ import { Observable } from "rxjs";
 
 
 @Injectable()
-export class programsEffects {
+export class activityEffects {
 
   constructor(private action$: Actions , private http : Http) { }
 
-  @Effect() pullPrograms$ = this.action$
+  @Effect() pullactivities$ = this.action$
   .ofType(PULL_ACTIVITIES)
   .switchMap( () => {
-    return this.http.get('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel2/' , config)
+    return this.http.get('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel2/' , {headers : config})
         .map((res) =>
           res.json().map(item => {
-            console.log(item);
             return new Activity(
               item.id,
               item.url,
