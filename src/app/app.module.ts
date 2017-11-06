@@ -7,10 +7,12 @@ import { mainReducer } from './reducers/mainReducer';
 import { programsEffects } from './effects/programsEffects';
 import { activityEffects }  from './effects/activitiesEffects';
 import { AppComponent } from './app.component';
+import { ProgramComponent } from './program/program.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProgramComponent
   ],
   imports: [
     BrowserModule,

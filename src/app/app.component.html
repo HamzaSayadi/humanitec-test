@@ -3,7 +3,7 @@
   <h1>
     This is the list of programs
   </h1>
-  <ul *ngFor="let program of programs">
-    <li> {{program.name}} </li>
-  </ul>
+  <div *ngFor="let program of programs">
+     <program [program]="program"> </program>
+  </div>
 </div>
