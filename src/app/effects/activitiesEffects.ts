@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 
 import { Http  } from '@angular/http';
 import { config } from '../config';
-import { PULL_ACTIVITIES , GOT_ACTIVITIES } from '../actions';
+import { PULL_ACTIVITIES , GOT_ACTIVITIES , DELETE_ACTIVITY , ACTIVITY_DELETED } from '../actions';
 import Activity from '../models/Activity'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -13,6 +13,7 @@ import { Observable } from "rxjs";
 @Injectable()
 export class activityEffects {
 
+  activtyIdInProgress : number ;
   constructor(private action$: Actions , private http : Http) { }
 
   @Effect() pullactivities$ = this.action$
@@ -42,6 +43,20 @@ export class activityEffects {
         )
   .switchMap(result =>
         Observable.of({type: GOT_ACTIVITIES, payload: {pulledArray:  result}})
+  )
+  })
+
+  @Effect() deleteActivity$ = this.action$
+  .ofType(DELETE_ACTIVITY)
+  .switchMap( action => {
+    return this.http.delete('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel2/'+action.payload.activityId , {headers : config})
+        .map((res) =>
+        this.activtyIdInProgress = action.payload.activityId
+  )
+  .switchMap((result) => {
+        console.log(result)
+        return Observable.of({type: ACTIVITY_DELETED, payload: {activityId : this.activtyIdInProgress}})
+      }
   )
   })
 

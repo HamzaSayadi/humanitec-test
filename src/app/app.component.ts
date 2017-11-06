@@ -21,14 +21,13 @@ export class AppComponent implements OnInit {
     this.activities = []
 
     store.select<AppState>('mainReducer').subscribe((value) => {
-      console.log(value)
+
       this.programs = value.programs
       this.activities = value.activities
       this.programs.forEach(program => {
         this.activities.forEach(activity => {
           if(activity.workflowlevel1 === program.url)
             program.activties.push(activity);
-          console.log(this.programs);
         });
       });
     });
