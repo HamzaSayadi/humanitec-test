@@ -16,7 +16,6 @@ export const INITIAL_STATE : AppState = {
 }
 
 export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
-	console.info(action)
 	switch (action.type) {
 		case GOT_PROGRAMS:
 			return {
@@ -30,20 +29,17 @@ export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
 			};
 		case ACTIVITY_DELETED:
 			let newActivities = [...state.activities]
-			console.log(state.activities)
 			newActivities.splice(
 			    newActivities.map(function (activity) {
 			      return activity.id;
 			    }).indexOf(action.payload.activityId)
 			,1);
-			console.log(newActivities)
 			return {
 				...state,
 				activities : newActivities
 			};
 
-		case ADDED_ACTIVITY:	
-		 	console.log([...state.activities].concat([action.payload.pulledItem]));
+		case ADDED_ACTIVITY:
 			return {
 				...state,
 				activities : [...state.activities].concat([action.payload.pulledItem])
