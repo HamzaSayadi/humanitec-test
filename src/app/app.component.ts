@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
       this.programs = value.programs
       this.activities = value.activities
       this.programs.forEach(program => {
+        program.activties = [];
         this.activities.forEach(activity => {
           if(activity.workflowlevel1 === program.url)
             program.activties.push(activity);
