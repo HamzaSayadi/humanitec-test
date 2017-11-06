@@ -8,28 +8,40 @@
           </activity>
         </li>
       </ul>
+  
       <li class="list-group-item">
         <div *ngIf="!name; else forminfo">
           <form [formGroup]="rForm" (ngSubmit)="add(rForm.value)">
 
-                <label>Name
+            <label>Name
                   <input type="text" formControlName="name">
                 </label>
-                <p *ngIf="rForm.controls.name.errors">This field is required!</p>
-                <label>Start date
-                  <input type="text" formControlName="startdate">
-                </label>
+            <p *ngIf="rForm.controls.name.errors">This field is required!</p>
+              <div class="input-group">
+                <label>Start date</label>
+                <input type="text" formControlName="startdate" class="form-control" placeholder="yyyy-mm-dd"
+             name="dp" ngbDatepicker #d="ngbDatepicker">
+                  <button class="input-group-addon" (click)="d.toggle()" type="button">
+                    <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                  </button>
+              </div>
 
-                <label>End date
-                  <input type="text" formControlName="enddate">
-                </label>
 
-                <input type="submit" class="btn " value="Submit Form" [disabled]="!rForm.valid">
-
+            <div class="input-group">
+              <label>End date</label>
+                  <input type="text" formControlName="enddate" class="form-control" placeholder="yyyy-mm-dd"
+               name="dp" ngbDatepicker #a="ngbDatepicker">
+               <button class="input-group-addon" (click)="a.toggle()" type="button">
+                 <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+               </button>
+          </div>
+          <div class="float-right submit-button-container">
+            <input type="submit" class="btn btn-primary" value="Submit Form" [disabled]="!rForm.valid">
+          </div>
+          <div style="clear : both;">
+          </div>
           </form>
         </div>
-
-{{rForm.controls}}
 
       </li>
     </ng-template>
