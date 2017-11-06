@@ -1,14 +1,17 @@
 // counter.ts
 import { ActionReducer, Action } from '@ngrx/store';
 import { GOT_PROGRAMS , GOT_ACTIVITIES } from '../actions';
-
+import Activity from '../models/Activity'
+import Program from '../models/Program'
 
 export interface AppState {
-	programs : object[]
+	programs : Program[] ,
+	activities : Activity[]
 }
 
 export const INITIAL_STATE : AppState = {
-	programs : []
+	programs : [] ,
+	activities : []
 }
 
 export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
@@ -16,12 +19,12 @@ export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
 		case GOT_PROGRAMS:
 			return {
 				...state,
-				programs : state.programs
+				programs : action.payload.pulledArray
 			};
 		case GOT_ACTIVITIES:
 			return {
 				...state,
-				programs : state.programs
+				programs : action.payload.pulledArray
 			};
 
 		default:

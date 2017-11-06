@@ -19,7 +19,7 @@ export class programsEffects {
   @Effect() pullPrograms$ = this.action$
   .ofType(PULL_PROGRAMS)
   .switchMap( () => {
-    return this.http.get('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel1/' , config)
+    return this.http.get('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel1/' , {headers : config})
         .map((res) =>
           res.json().map(item => {
             return new Program(

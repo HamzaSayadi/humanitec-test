@@ -21,6 +21,7 @@ export class programsEffects {
     return this.http.get('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel2/' , config)
         .map((res) =>
           res.json().map(item => {
+            console.log(item);
             return new Activity(
               item.id,
               item.url,
