@@ -8,35 +8,41 @@
           </activity>
         </li>
       </ul>
-
+      <div *ngIf="!showForm">
+        <li class="list-group-item text-center">
+        <button class="btn btn-primary" (click)="toggleForm()"> Add an activity </button>
+      </li>
+      </div>
+      <div *ngIf="showForm">
       <li class="list-group-item">
         <div *ngIf="!name; else forminfo">
-          <form [formGroup]="rForm" (ngSubmit)="add(rForm.value)">
+          <form [formGroup]="rForm" (ngSubmit)="add(rForm.value)" #myform="ngForm">
 
             <label>Name *
-                  <input type="text" formControlName="name">
+                  <input type="text" class="form-control" formControlName="name">
                 </label>
-            <p *ngIf="rForm.controls.name.errors">This field is required!</p>
+
+            <p class="alert alert-warning" *ngIf="rForm.controls.name.errors && formSubmitted">This field is required!</p>
             <div class="input-group">
-              <label>Start date</label>
-              <div>
+              <label class="input-label">Start date : </label>
+
               <input type="text" formControlName="startdate" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
-              </div>
+
               <button class="input-group-addon" (click)="d.toggle()" type="button">
                     <img src="https://image.flaticon.com/icons/svg/26/26012.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-                  </button>
+              </button>
             </div>
 
 
             <div class="input-group">
-              <label>End date</label>
+              <label class="input-label">End date : </label>
               <input type="text" formControlName="enddate" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #a="ngbDatepicker">
               <button class="input-group-addon" (click)="a.toggle()" type="button">
                  <img src="https://image.flaticon.com/icons/svg/26/26012.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                </button>
             </div>
             <div class="float-right submit-button-container">
-              <input type="submit" class="btn btn-primary" value="Add Activity" [disabled]="!rForm.valid">
+              <input type="submit" class="btn btn-primary" value="Add Activity" >
             </div>
             <div style="clear : both;">
               <small>* : required field</small>
@@ -45,5 +51,6 @@
         </div>
 
       </li>
+    </div>
     </ng-template>
   </ngb-panel>

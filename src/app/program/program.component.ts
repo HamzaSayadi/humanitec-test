@@ -15,8 +15,13 @@ export class ProgramComponent implements OnInit {
   name : string;
   startdate : string;
   enddate : string;
+  showForm : boolean;
+  formSubmitted : boolean;
   rForm: FormGroup;
+
   constructor(private store: Store<AppState> , private fb: FormBuilder) {
+    this.showForm = false;
+    this.formSubmitted = false ;
     store.select<AppState>('mainReducer')
     this.rForm = fb.group({
       'name' : [null, Validators.required],
@@ -28,8 +33,14 @@ export class ProgramComponent implements OnInit {
   ngOnInit() {
   }
 
+  toggleForm() {
+   this.showForm = !this.showForm ;
+  }
   add(value) {
-
+    this.formSubmitted = true
+    if (this.rForm.invalid) {
+      return false;
+    }
     this.store.dispatch({ type: 'ADD_ACTIVITY', payload: {
         "name": value.name,
         "workflowlevel1": this.program.url,
