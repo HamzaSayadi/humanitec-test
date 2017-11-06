@@ -8,11 +8,13 @@ import { programsEffects } from './effects/programsEffects';
 import { activityEffects }  from './effects/activitiesEffects';
 import { AppComponent } from './app.component';
 import { ProgramComponent } from './program/program.component';
+import { ActivityComponent } from './activity/activity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProgramComponent
+    ProgramComponent,
+    ActivityComponent
   ],
   imports: [
     BrowserModule,
