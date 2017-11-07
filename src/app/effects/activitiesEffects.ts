@@ -3,10 +3,14 @@ import { Injectable } from "@angular/core";
 
 import { Http } from '@angular/http';
 import { config } from '../config';
-import { PULL_ACTIVITIES, GOT_ACTIVITIES, ADD_ACTIVITY, ADDED_ACTIVITY, DELETE_ACTIVITY, ACTIVITY_DELETED } from '../actions';
+import { PULL_ACTIVITIES, GOT_ACTIVITIES,
+         ADD_ACTIVITY, ADDED_ACTIVITY,
+         DELETE_ACTIVITY, ACTIVITY_DELETED ,
+         PULL_ACTIVITIES_NET_ERROR} from '../actions';
 import Activity from '../models/Activity'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs";
 
 
@@ -20,6 +24,7 @@ export class activityEffects {
     .ofType(PULL_ACTIVITIES)
     .switchMap(() => {
       return this.http.get('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel2/', { headers: config })
+
         .map((res) =>
           res.json().map(item => {
             return new Activity(
@@ -41,9 +46,18 @@ export class activityEffects {
           }
           )
         )
-        .switchMap(result =>
-          Observable.of({ type: GOT_ACTIVITIES, payload: { pulledArray: result } })
-        )
+        .switchMap((result) => {
+          localStorage.setItem('activities', JSON.stringify(result));
+          return Observable.of({ type: GOT_ACTIVITIES, payload: { pulledArray: result } }
+          )})
+        .catch((error) => {
+          const actvivities = JSON.parse(localStorage.getItem('activities'));
+          if ( actvivities !== null) {
+              return Observable.of({ type: GOT_ACTIVITIES, payload: { pulledArray: actvivities } })
+          }
+          return Observable.of({ type: PULL_ACTIVITIES_NET_ERROR, payload: error } )
+
+        })
     })
 
   @Effect() addactivity$ = this.action$
