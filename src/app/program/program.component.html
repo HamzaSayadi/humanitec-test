@@ -18,7 +18,7 @@
         <div *ngIf="!name; else forminfo">
           <form [formGroup]="rForm" (ngSubmit)="add(rForm.value)" #myform="ngForm">
 
-            <label>Name *
+            <label>Name <small>*</small>
                   <input type="text" class="form-control" formControlName="name">
                 </label>
 
