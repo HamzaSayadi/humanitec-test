@@ -1,6 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-
+  <div class="flash-messages-container">
+  <p *ngFor="let message of messages">
+    <ngb-alert [type]="message.type" (close)="closeAlert(message.id)">{{ message.message }}</ngb-alert>
+  </p>
+  </div>
 <nav class="navbar navbar-light bg-faded">
   <h1 class="navbar-brand mb-0 text-center">This is the list of programs</h1>
 </nav>

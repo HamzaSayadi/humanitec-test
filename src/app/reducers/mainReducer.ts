@@ -7,12 +7,14 @@ import Program from '../models/Program'
 
 export interface AppState {
 	programs : Program[] ,
-	activities : Activity[]
+	activities : Activity[],
+	flashMessage : string
 }
 
 export const INITIAL_STATE : AppState = {
 	programs : [] ,
-	activities : []
+	activities : [],
+	flashMessage : ''
 }
 
 export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
@@ -36,13 +38,15 @@ export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
 			,1);
 			return {
 				...state,
-				activities : newActivities
+				activities : newActivities,
+				flashMessage : "Activity Deleted"
 			};
 
 		case ADDED_ACTIVITY:
 			return {
 				...state,
-				activities : [...state.activities].concat([action.payload.pulledItem])
+				activities : [...state.activities].concat([action.payload.pulledItem]),
+				flashMessage : "Activity Added"
 			};
 
 		default:
