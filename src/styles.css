@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.card-header{
+    padding: 0 !important
+}
+.card-header>a {
+    padding: 6px 20px;
+    display: block;
+    width: 100%;
+    line-height: 3em;
+}
