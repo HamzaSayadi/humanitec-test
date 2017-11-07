@@ -9,3 +9,6 @@ export const ACTIVITY_DELETED : string = 'ACTIVITY_DELETED';
 
 export const ADD_ACTIVITY : string = "ADD_ACTIVITY";
 export const ADDED_ACTIVITY : string = "ADDED_ACTIVITY";
+
+export const PULL_PROGRAMS_NET_ERROR : string = 'PULL_PROGRAMS_NET_ERROR';
+export const PULL_ACTIVITIES_NET_ERROR : string = 'PULL_ACTIVITIES_NET_ERROR';

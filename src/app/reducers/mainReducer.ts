@@ -18,6 +18,7 @@ export const INITIAL_STATE : AppState = {
 }
 
 export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
+	console.log(action)
 	switch (action.type) {
 		case GOT_PROGRAMS:
 			return {
