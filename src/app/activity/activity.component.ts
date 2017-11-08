@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 
 import {AppState} from '../reducers/mainReducer';
-import { DELETE_ACTIVITY } from '../actions'
+import { DELETE_ACTIVITY } from '../actions/activitiesActions'
 
 @Component({
   selector: 'activity',

@@ -1,7 +1,7 @@
 // counter.ts
 import { ActionReducer, Action } from '@ngrx/store';
-import { GOT_PROGRAMS , GOT_ACTIVITIES , ADD_ACTIVITY, ADDED_ACTIVITY, DELETE_ACTIVITY , ACTIVITY_DELETED } from '../actions';
-
+import {   GOT_ACTIVITIES , ADD_ACTIVITY, ADDED_ACTIVITY, DELETE_ACTIVITY , ACTIVITY_DELETED } from '../actions/activitiesActions';
+import { GOT_PROGRAMS } from '../actions/programsActions'
 import Activity from '../models/Activity'
 import Program from '../models/Program'
 
@@ -46,7 +46,7 @@ export function mainReducer(state: AppState = INITIAL_STATE, action: Action) {
 		case ADDED_ACTIVITY:
 			return {
 				...state,
-				activities : [...state.activities].concat([action.payload.pulledItem]),
+				activities : [...state.activities , ...action.payload.pulledItem],
 				flashMessage : "Activity Added"
 			};
 

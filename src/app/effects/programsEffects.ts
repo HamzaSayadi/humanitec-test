@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 
 import { Http } from '@angular/http';
 import { config } from '../config';
-import { PULL_PROGRAMS, GOT_PROGRAMS, PULL_PROGRAMS_NET_ERROR } from '../actions';
+import { PULL_PROGRAMS, GOT_PROGRAMS, PULL_PROGRAMS_NET_ERROR } from '../actions/programsActions';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';

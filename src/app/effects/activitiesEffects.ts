@@ -6,7 +6,7 @@ import { config } from '../config';
 import { PULL_ACTIVITIES, GOT_ACTIVITIES,
          ADD_ACTIVITY, ADDED_ACTIVITY,
          DELETE_ACTIVITY, ACTIVITY_DELETED ,
-         PULL_ACTIVITIES_NET_ERROR} from '../actions';
+         PULL_ACTIVITIES_NET_ERROR} from '../actions/activitiesActions';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
