@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import Activity from './models/Activity';
-import { config } from './config';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
-import { Observable } from "rxjs";
-import { PULL_ACTIVITIES, GOT_ACTIVITIES,
-         ADD_ACTIVITY, ADDED_ACTIVITY,
-         DELETE_ACTIVITY, ACTIVITY_DELETED ,
-         PULL_ACTIVITIES_NET_ERROR} from './actions';
+import Activity from '../models/Activity';
+import { config } from '../config';
+
+
 
 @Injectable()
 export class ActivitiesService {

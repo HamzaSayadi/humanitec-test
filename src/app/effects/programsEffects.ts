@@ -11,33 +11,17 @@ import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs";
 
 import Program from "../models/Program";
+import { ProgramsService } from "../services/programs.service"
 
 @Injectable()
 export class programsEffects {
 
-  constructor(private action$: Actions, private http: Http) { }
+  constructor(private action$: Actions, private http: Http , private programsService : ProgramsService) { }
 
   @Effect() pullPrograms$ = this.action$
     .ofType(PULL_PROGRAMS)
-    .switchMap(() => {
-      return this.http.get('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel1/', { headers: config })
-        .map((res) =>
-          res.json().map(item => {
-            return new Program(
-              item.url,
-              item.id,
-              item.status,
-              item.name,
-              item.description,
-              item.start_date,
-              item.end_date,
-              item.create_date,
-              item.edit_date,
-              item.organization,
-              []
-            )
-          }
-          )
+    .switchMap(() =>
+        this.programsService.getPrograms()
         )
         .switchMap((result) => {
           localStorage.setItem('programs', JSON.stringify(result));
@@ -51,6 +35,4 @@ export class programsEffects {
           }
           return Observable.of({ type: PULL_PROGRAMS_NET_ERROR, payload: error })
         })
-  })
-
-}
+  }

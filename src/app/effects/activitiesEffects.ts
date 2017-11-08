@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs";
-import { ActivitiesService } from "../activities.service"
+import { ActivitiesService } from "../services/activities.service"
 
 @Injectable()
 export class activityEffects {
