@@ -31,15 +31,13 @@ export class AppComponent implements OnInit {
         this.messages.push({id : this.messages.length + 1  , message : value.flashMessage , type : "info"})
       }
 
-      this.programs.forEach(program => {
+      this.programs.map((program) => {
         program.activties = [];
-        this.activities.forEach(activity => {
-          if(activity.workflowlevel1 === program.url)
-            program.activties.push(activity);
+        program.activties = this.activities.filter((activity) => {
+          return (activity.workflowlevel1 === program.url)
         });
       });
     });
-    console.log(environment)
   }
 
   ngOnInit() {
