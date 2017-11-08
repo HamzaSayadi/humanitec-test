@@ -3,6 +3,7 @@ import Activity from './models/Activity'
 import Program from './models/Program'
 import { Store } from '@ngrx/store';
 import {AppState} from './reducers/mainReducer';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
         });
       });
     });
-    console.log(this.messages)
+    console.log(environment)
   }
 
   ngOnInit() {

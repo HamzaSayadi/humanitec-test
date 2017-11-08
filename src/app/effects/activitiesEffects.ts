@@ -7,45 +7,23 @@ import { PULL_ACTIVITIES, GOT_ACTIVITIES,
          ADD_ACTIVITY, ADDED_ACTIVITY,
          DELETE_ACTIVITY, ACTIVITY_DELETED ,
          PULL_ACTIVITIES_NET_ERROR} from '../actions';
-import Activity from '../models/Activity'
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs";
-
+import { ActivitiesService } from "../activities.service"
 
 @Injectable()
 export class activityEffects {
 
   activtyIdInProgress: number;
-  constructor(private action$: Actions, private http: Http) { }
+  constructor(private action$: Actions, private http: Http , private activitiesService : ActivitiesService) { }
 
   @Effect() pullactivities$ = this.action$
     .ofType(PULL_ACTIVITIES)
-    .switchMap(() => {
-      return this.http.get('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel2/', { headers: config })
-
-        .map((res) =>
-          res.json().map(item => {
-            return new Activity(
-              item.id,
-              item.url,
-              item.name,
-              item.workflowlevel1,
-              item.expected_start_date,
-              item.expected_end_date,
-              item.actual_start_date,
-              item.actual_end_date,
-              item.description,
-              item.short_name,
-              item.create_date,
-              item.edit_date,
-              item.status,
-              item.progress
-            )
-          }
-          )
-        )
+    .switchMap((action , index) => {
+        return this.activitiesService.getActivities()
         .switchMap((result) => {
           localStorage.setItem('activities', JSON.stringify(result));
           return Observable.of({ type: GOT_ACTIVITIES, payload: { pulledArray: result } }
@@ -64,36 +42,17 @@ export class activityEffects {
     .ofType(ADD_ACTIVITY)
     .map(action => JSON.stringify(action.payload))
     .switchMap((payload) => {
-      return this.http.post('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel2/', payload, { headers: config })
-        .map((res) => {
-          const item = res.json();
-          return new Activity(
-            item.id,
-            item.url,
-            item.name,
-            item.workflowlevel1,
-            item.expected_start_date,
-            item.expected_end_date,
-            item.actual_start_date,
-            item.actual_end_date,
-            item.description,
-            item.short_name,
-            item.create_date,
-            item.edit_date,
-            item.status,
-            item.progress
-          )
-        }
-        )
+        return this.activitiesService.addActivity(payload)
+      })
         .switchMap(result =>
           Observable.of({ type: ADDED_ACTIVITY, payload: { pulledItem: result } })
         )
-    })
+
 
   @Effect() deleteActivity$ = this.action$
     .ofType(DELETE_ACTIVITY)
-    .switchMap(action => {
-      return this.http.delete('http://dev-v2.tolaactivity.app.tola.io/api/workflowlevel2/' + action.payload.activityId, { headers: config })
+    .switchMap((action) => {
+      return this.activitiesService.deleteActivity(action.payload.activityId)
         .map((res) =>
           this.activtyIdInProgress = action.payload.activityId
         )

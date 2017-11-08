@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { ProgramComponent } from './program/program.component';
 import { ActivityComponent } from './activity/activity.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ActivitiesService } from './activities.service'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [ ActivitiesService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
